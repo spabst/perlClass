@@ -1,0 +1,67 @@
+#header h1{
+	color: #fff;
+	background-color:  rgb(51, 51, 51);	
+}
+#set_heritage{
+	display: none;
+}
+#modify_met textarea{
+	height:182px;
+}
+.plus{
+	margin-bottom: 4px;
+	margin-left: 8px;
+	padding:7px 20px;
+}
+#projectComments{
+	height:182px;
+}
+.fixedWidth{
+	margin-top: 2px;
+	margin-bottom: 10px;
+	width:100px;
+}
+.row{
+	padding: 0% 1% ;
+}
+.reveal-modal .button{
+	margin: 0px;
+	padding: 8px 15px;
+}
+p{
+	text-align: justify;
+}
+hr{
+	margin-top: 5px;
+}
+h1,h2,h3,h4,h5{
+	padding-left: 6px;
+}
+#erase{
+	background-color: #aaa;
+}
+#erase:hover{
+	background-color: red;
+}
+.hidden{
+	display: none;
+}
+#parentClass{
+	width: 200px;
+	padding: 4px;
+}
+
+/* Media queries */
+@media screen and (max-width: 630px) {
+#erase{
+	width: 100%;
+}
+
+input.ng-invalid {
+  border: 1px solid red;
+}
+input.ng-valid {
+  border: 1px solid green;
+}
+
+}

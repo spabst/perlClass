@@ -1,0 +1,86 @@
+<div id="header" class="row">
+	<h3>Perl - moose classes generation support</h3>
+	<h5>A small web-App that wants to make developper's life easier</h5>
+
+	<h1>Project name :  {{projectName}}</h1>
+	<h2>Selected class : {{SelectedClass.name}} <span ng-show="SelectedClass.hasParent">(extends {{SelectedClass.hasParent}})</span></h2>
+	<!-- <h6>{{SelectedClass}}</h6> -->
+</div>
+
+<div  class="row">
+ 	<button ng-click="ShowHide()" class="plus"/>+</button>
+ 	<span ng-show="SelectedClass.hasParent">Change the parent property</span>
+ 	<span ng-hide="SelectedClass.hasParent">Add a class inheritance</span>
+
+	<div id="set_ParentClass" class="hidden">	
+		The selected class extends the 
+		<select id="parentClass" ng-model="parentName" ng-options="parent.name for parent in classesList">	</select>
+		 class. <button ng-click="SetParentClass()" class="plus"/>Go</button> <!-- {{SelectedClass.name}} -->
+	</div>
+
+	<hr/>
+</div>
+
+
+<div id = "content">
+	<div class="row">
+		<div class="large-6 medium-6 small-12 columns">
+			<div class="row">
+				<div class="large-12 columns"><h6>Select an attribute to work with : {{SelectedClass.attributes.indexOf(selectedAttribute)}}</h6></div> 
+			</div>	
+			<div class="row">
+				<div id="col1" class="large-8 medium-8 small-8 columns">						
+					<div class="variation1">
+						<div id="select_menu">
+							<select id="selectedAttribute" ng-model="selectedAttribute" ng-options="attribute.name group by attribute.inherited for attribute in SelectedClass.attributes" orderBy= 'inherited' size=10>
+								<option value="" disabled>Selected Option</option>
+							</select><br/>
+						</div>
+					</div>	
+				</div><!-- end of id col1 -->
+				<div id = "col2" class="large-4 medium-4 small-4 columns">
+					<div class="buttonlist">
+						<button class="button fixedWidth" data-reveal-id="AddAttributeModal" ng-click="OpenAttributesReveal()">Add</button><br/>
+						<a href="#/attributeEdition/{{SelectedClass.attributes.indexOf(selectedAttribute)}}"><button class="fixedWidth" ng-disabled="!selectedAttribute"/>Edit</button></a><br/>	
+						<button class="fixedWidth" ng-click="RemoveAttribute()" ng-disabled="!selectedAttribute" />Delete</button><br/>
+					</div>
+				</div><!-- end of id col2 -->
+			</div>
+		</div>	
+		<div class="large-6 medium-6 small-12 columns">
+			<div class="row">
+				<div class="large-12 columns"><h6>Select a Method to work with</h6></div>
+			</div>	
+			<div class="row">
+				<div id = "col3" class="large-8 medium-8 small-8 columns">
+					<div class="variation1">
+						<div >
+							<select id="selectedMethod" ng-model="selectedMethod" ng-options="(method.name + ' ' + method.overridden ) group by method.inherited for method in SelectedClass.methods"  size=10><option value="" disabled>Selected Option</option>
+							</select><br/>	
+						</div>
+					</div>
+				</div> <!-- end of id col3 -->
+				<div id = "col4" class="large-4 medium-4 small-4 columns">
+					<button	class="edit fixedWidth" data-reveal-id="AddMethodsModal" ng-click="OpenMethodsReveal()"  >Add</button><br/>
+					<a href="#/methodEdition/{{SelectedClass.methods.indexOf(selectedMethod)}}"><button class="fixedWidth" ng-disabled="!selectedMethod"/>Edit</button></a><br/>		
+					<button class="fixedWidth" ng-disabled="!selectedMethod" />Delete</button><br/>
+				
+				</div> <!-- end of id col4 -->
+			</div>
+		</div>
+	</div>
+</div> <!-- end of id container -->
+
+<div id="class_general_menu" class="row">
+	<div class= "large-12 columns"><hr/></div>
+	<div class="large-2 medium-3 small-6 columns">
+		<a href="#/ClassesDeclaration"><INPUT class="button" type="submit" value="Back"></a> 
+	</div>		
+	<div class="large-1 large-offset-9 medium-2 medium-offset-7 small-6 columns end">
+		<span data-tooltip class="has-tip" title="Deletes all stored data and starts a brand new project"><button id="erase" type="button" ng-click="reset()">Resetta</button></span>
+	</div>
+</div>
+
+<!-- 
+<button ng-click="ShowSelectedClass()">check Selected Class</button>
+<button ng-click="ShowDataFactory()">Show Data Factory</button> -->

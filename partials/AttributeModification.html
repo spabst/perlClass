@@ -1,0 +1,65 @@
+<div id="header" class="row">
+	<h3>Perl - moose classes generation support</h3>
+	<h5>A small web-App that wants to make developper's life easier</h5>
+
+	<h1>Project name :  {{projectName}}</h1>
+	<h2>Selected class :  {{SelectedClass.name}}</h2>
+	<!-- <h6>{{SelectedClass.attributes}}</h6> -->
+</div>
+<div id="container" class="row">
+	<form name="signup_form" novalidate ng-submit="SaveAttributesContent()">
+	<div id="add_attribut">
+		<fieldset>
+			<label>Nom de l'Attribut
+			<input ng-model="Attribute.name" type='text' name='attribut_name' ng-minlength=2 required /> 
+			</label>
+			   <div class="error" 
+			        ng-show="signup_form.attribut_name.$dirty &amp;&amp; signup_form.attribut_name.$invalid">
+			    <small class="error" 
+			        ng-show="signup_form.attribut_name.$error.required">
+			        A name is required.
+			    </small>
+			    <small class="error" 
+			            ng-show="signup_form.attribut_name.$error.minlength">
+			            The name is required to be at least 2 characters.
+			    </small>
+			  </div>
+			<br>
+			<div class="row">
+				<div class="large-4 medium-3 small-12 columns">
+			      		<label>Mandatory</label>			
+					<input ng-model="Attribute.mandatory" id="IsNotMandatory" type='radio' name='obligatoire' value=0 /><label for="IsNotMandatory">No</label>
+					<input ng-model="Attribute.mandatory" id="IsMandatory" type='radio' name='obligatoire' value=1 /><label for="IsMandatory">Yes</label>
+				</div>
+				<div class="large-4 medium-5 small-12 columns">
+					<label>Access</label>
+					<input ng-model="Attribute.rw" id="readOnly" type='radio' name='access' value=0  /><label for="readOnly">Read Only</label>
+					<input ng-model="Attribute.rw" id="readWrite"type='radio' name='access' value=1  /><label for="readWrite">Read and Write</label>
+				</div>
+				<div class="large-4 medium-4 small-12 columns">
+			 		<label>Type de Variable : <!--  {{typeName}} - {{gradeC}} - {{typeIndex}} -->
+						<select ng-model="Attribute.VarType" ng-options="type.name  group by type.category for type in varTypes"></select>
+			      		</label>
+				</div>
+			</div>
+
+		<label>Default value
+			<input ng-model="Attribute.defaultValue"  ng-pattern="{{Attribute.VarType.regExp}}" type='text' name='valeur_defaut' placeholder="{{Attribute.VarType.suggestion}}"/><span id="textDiv"></span><!--  '/^[a-zA-Z]+$/' -->
+		</label>		
+		<div class="error" 
+			ng-show="signup_form.valeur_defaut.$dirty &amp;&amp; signup_form.valeur_defaut.$invalid">
+			<small class="error" 
+			ng-show="signup_form.valeur_defaut.$error.pattern">
+			A name is required.
+			</small>
+		</div>	
+		<label>Trigger
+			<textarea ng-model="Attribute.trigger" name="trigger" id="trigger" rows="4" cols="50"></textarea>
+		</label>
+		</fieldset> 
+ 			<button id="submit">Save</button>
+			<a href="#/classContent"><button>Cancel</button></a>
+	</form>
+</div>
+
+</div> <!--ends container id-->

@@ -1,0 +1,57 @@
+<!doctype html>
+<html data-ng-app="demoApp" ng-controller="SimpleController">
+<head>
+    <title>Sebastian Pabst Angular App</title>
+</head>
+<body >
+    <div>
+        <!-- Placeholder for views -->
+        <div data-ng-view=""></div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
+
+    <script type="text/javascript">
+    	var demoApp = angular.module('demoApp', []);
+
+        demoApp.config(function ($routeProvider){
+            $routeProvider
+                .when('/',
+                    {
+                        controller : 'NewController',
+                        templateUrl: 'partials/view1.html'
+                    })
+                .when('/view2',
+                    {
+                        
+                        templateUrl: 'partials/view2.html'
+                    })
+                .otherwise({ 
+                    redirectTo : '/'
+                });
+        });
+
+
+    	function SimpleController($scope){
+    		$scope.customers = [
+    			{name:'Dave', city:'New York'}, 
+    			{name:'Eleonora', city:'Lausanne'}, 
+    			{name :'Devis' , city:'Mendrisio'}, 
+    			{name: 'Daniel' , city : 'Minusio'}
+    		];		
+        }   
+        function NewController($scope, $location){
+            $scope.addCustomer = function(){
+                $scope.customers.push(
+                    {
+                        name: $scope.newCustomer.name, 
+                        city : $scope.newCustomer.city
+                    });
+                $location.path("/");
+            };
+    	}
+
+    </script>
+
+
+</body>
+</html>

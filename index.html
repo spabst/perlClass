@@ -1,0 +1,153 @@
+<!doctype html>
+<html data-ng-app="demoApp">
+<head>
+    <title>Sebastian Pabst Angular App</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost/ProgettoLocale/css/foundation.css" />
+    <link rel="stylesheet" type="text/css" href="css/styleFoundation.css" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="services/perlClassFactory.js"></script>
+    <script type="text/javascript" src="app/controllers/controllers.js"></script>
+    <script type="text/javascript" src="js/angular-local-storage.js"></script>
+    <script type="text/javascript" src="http://code.angularjs.org/1.0.0rc10/angular-cookies-1.0.0rc10.js"></script>
+    <title>Perl, création de classes</title>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://localhost/ProgettoLocale/js/promptMenu2.js"></script>
+    <script src="http://localhost/ProgettoLocale/js/modernizr.js"></script>
+    <script type="text/javascript">
+        function stopRKey(evt) {
+          var evt = (evt) ? evt : ((event) ? event : null);
+          var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+          if ((evt.keyCode == 13) && (node.type=="text"))  {return false;}
+        }
+
+        document.onkeypress = stopRKey;
+    </script> 
+</head>
+
+<body >
+
+
+    <div>
+        <!-- Placeholder for views -->
+        <div data-ng-view="">
+        </div>
+    </div>
+
+<div ng-controller="JsonDataController">
+
+    <div id="SetProjectName" class="reveal-modal medium" data-reveal title="Create a new Project">
+        <h6>Enter a name for the project to start.</h6>
+
+        <form  name="ProfjectNameform" novalidate ng-submit="setProjectName()" >
+            <fieldset>
+                <label for="project_name">Name
+                    <input type="text" ng-model="new_project_name"  ng-pattern='/^[a-zA-Z_]+([a-zA-Z0-9_?!\.]+)?$/' id="project_name" name="project_name" class="nameValue"  required  />
+                </label>  
+                <div class="error" 
+                        ng-show="ProfjectNameform.project_name.$dirty &amp;&amp; ProfjectNameform.project_name.$invalid">
+                    <small class="error" 
+                        ng-show="ProfjectNameform.project_name.$error.required">
+                        A name is required.
+                    </small>
+                    <small class="error" 
+                        ng-show="ProfjectNameform.project_name.$error.pattern">
+                        The name contains some invalid character.
+                    </small>
+                </div>   
+            </fieldset>
+
+            <button ng-disabled="ProfjectNameform.$invalid"  class="submit" />Submit</button>
+        </form>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+
+    <div id="Modal" class="reveal-modal medium" data-reveal title="Create new user">
+        <h6>Let's create a new class.</h6>
+        <form id="Classform" name = "Classform"  novalidate ng-submit="AddClass()">
+            <fieldset>
+                <label for="name">Name
+                    <input type="text" ng-model="NewClass_name" ng-pattern='/^[a-zA-Z_]+([a-zA-Z0-9_?!\.]+)?$/' name="name" id="name" placeholder="No Spaces allowed : e.g. Class_Name1" required />
+                </label>
+                <div class="error" 
+                        ng-show="Classform.name.$dirty &amp;&amp; Classform.name.$invalid">
+                    <small class="error" 
+                        ng-show="Classform.name.$error.required">
+                        A name is required.
+                    </small>
+                    <small class="error" 
+                        ng-show="Classform.name.$error.pattern">
+                        The name contains some invalid character.
+                    </small>
+                </div>   
+            </fieldset>
+
+             <button ng-disabled="Classform.$invalid"  class="submit" />Submit</button>
+        </form>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <div id="AddAttributeModal" class="reveal-modal medium" data-reveal title="Create new attribut">
+        <h6>Add an attribute to the selected class</h6>
+        <form name = "AttributeName_form"  novalidate ng-submit="AddAttribut()">
+            <fieldset>
+                <label for="AtrrName">Name         
+                <input class="nameValue" ng-model="NewAttribute_name" ng-pattern='/^[a-zA-Z_]+([a-zA-Z0-9_?!\.]+)?$/' type="text" name="AtrrName" id="AtrrName" required/>
+                </label>
+                <div class="error" 
+                        ng-show="AttributeName_form.AtrrName.$dirty &amp;&amp; AttributeName_form.AtrrName.$invalid">
+                    <small class="error" 
+                        ng-show="AttributeName_form.AtrrName.$error.required">
+                        A name is required.
+                    </small>
+                    <small class="error" 
+                        ng-show="AttributeName_form.AtrrName.$error.pattern">
+                        The name contains some invalid character.
+                    </small>
+                </div> 
+            </fieldset>
+           <button ng-disabled="AttributeName_form.$invalid"  class="submit" />Submit</button>
+        </form>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+
+    <div id="AddMethodsModal" class="reveal-modal medium" data-reveal title="Create new method">
+        <h6>Add a method to the selected class</h6>
+        <form name = "MethodName_form" novalidate ng-submit="AddMethod()">
+            <fieldset>
+                <label for="MethName">Name
+                    <input class="nameValue" ng-model="NewMethod_name" type="text" name="MethName" id="MethName" />
+                </label>
+                <div class="error" 
+                        ng-show="AttributeName_form.AtrrName.$dirty &amp;&amp; AttributeName_form.AtrrName.$invalid">
+                    <small class="error" 
+                        ng-show="AttributeName_form.AtrrName.$error.required">
+                        A name is required.
+                    </small>
+                    <small class="error" 
+                        ng-show="AttributeName_form.AtrrName.$error.pattern">
+                        The name contains some invalid character.
+                    </small>
+                </div>             
+            </fieldset>
+            <button ng-disabled="MethodName_form.$invalid"  class="submit" />Submit</button>
+        </form>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+</div>
+
+<script src="http://localhost/ProgettoLocale/js/vendor/jquery.js"></script>
+<script src="http://localhost/ProgettoLocale/js/foundation/foundation.js"></script>
+<script src="http://localhost/ProgettoLocale/js/foundation/foundation.reveal.js"></script>
+<script>
+    $(document).foundation();
+    //$('#SetProjectName').foundation('reveal', 'open');
+</script>
+
+</body>
+</html>

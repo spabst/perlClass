@@ -1,0 +1,44 @@
+<div id="header" class="row">
+	<h3>Perl - moose classes generation support</h3>
+	<h5>A small web-App that wants to make developper's life easier</h5>
+
+	<h1>Project name :  {{projectName}}</h1>
+	<h2>Selected class :  {{SelectedClass.name}}</h2>
+	<!-- <h6>{{SelectedClass.attributes}}</h6> -->
+</div>
+<div id = "container" class="row">
+
+	<div class="large-12 columns" id = "content">
+		<form id="modify_met" name="modify_met" novalidate ng-submit="SaveMethodContent()" >
+			<fieldset>
+				<div class="row">
+					<div class="large-6 columns end">
+						<label>Method's name {{MethodIndex}}
+							<input ng-model="Method.name" type='text' name='method_name' ng-minlength=2 required  />
+						</label>
+
+						<div class="error" ng-show="modify_met.method_name.$dirty &amp;&amp; modify_met.method_name.$invalid">
+							<small class="error" ng-show="modify_met.method_name.$error.required">
+								A name is required.
+							</small>
+							<small class="error" ng-show="modify_met.method_name.$error.minlength">
+			            				The name is required to be at least 2 characters.
+							</small>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class = "large-12 columns">
+						<label>Method's definition
+							<textarea ng-model="Method.definition" name="methods_content" rows="10" cols="90"></textarea>
+						</label>
+					</div>
+				</div>
+
+			</fieldset>
+			<button ng-disabled="modify_met.$invalid"  class="submit" />Save</button>
+			<a href="#/classContent"><button>Cancel</button></a>
+
+		</form>
+	</div>
+</div>

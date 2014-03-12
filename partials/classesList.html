@@ -1,0 +1,76 @@
+<div id="header" class = "row">
+	<h3>Perl - moose classes generation support</h3>
+	<h5>A small web-App that wants to make developper's life easier</h5>
+
+	<h1>Nom du Projet : <i>{{projectName}}</i></h1>
+	<!-- <h2> Selected Class Index : {{selectedClassIndex}} </h2>  -->
+	<hr/>
+</div>
+
+
+<div id = "content" class="row">
+	<div class="row">
+		<!-- <button id="create-user">Create new user</button> -->
+		<div class="large-6 medium-6 small-12 columns">
+			<div class="row">
+				<div class="large-12 columns"><h6>Select a class to work with</h6></div>
+			</div>	
+			<div class="row">
+				<div class="large-8 medium-8 small-8 columns">		
+					<form method="post" action="links.cgi" id="myform" name="myform">
+						<div class="variation1">	
+							<div id="select_menu">
+
+								<select ng-model="SelectedClass" ng-options="c.name for c in classesList"  name="selected_class" id="selected_class" size=10>
+									<option value="">Select Option</option>
+								</select><br/>
+							</div>	
+						</div>
+					</form>	
+				</div>	<!--ends id col1-->
+
+				<div id="classButtonList" class="large-4 medium-4 small-4 columns">
+					<button class="button fixedWidth" data-reveal-id="Modal" ng-click="OpenReveal()">Add</button><br/>
+					<button class="fixedWidth" ng-click="EditClass()" ng-disabled="!SelectedClass"/>Edit</button><br/>
+					<button class="fixedWidth"  ng-click="RemoveClass()" ng-disabled="!SelectedClass" />Delete</button><br/>
+				</div> <!--ends id col2-->
+			</div>	
+		</div>
+		<div class="large-6 medium-6 small-12 columns">
+			<div class="row">
+				<div class="large-12 columns"><h6>Enter a comment for the class {{SelectedClass.name}} and {{classesList.indexOf(SelectedClass)}}</h6></div>
+			</div>	
+			<div class="row">
+				<div class="large-12 medium-12 small-12 columns">
+					<textarea ng-model="SelectedClass.comments" id="projectComments" placeholder="Enter here a comment that will appear on this class file. Insert the pattern '<% class_name %>' to insert the class's name. The app is going to automatically substitute the pattern with the name of the actual class" ng-disabled="!SelectedClass">
+					</textarea>
+				</div>
+			</div>
+		</div> 
+	</div> <!-- end of the container row -->
+ 
+	<div id="class_general_menu" class="row">
+		
+		<div class= "large-12 columns"><hr/></div>
+
+		<div class="large-3 medium-3 small-6 columns">
+			<a href="#/"><INPUT class="button" type="submit" value="Back"></a> 
+		</div>		
+
+		<div class="large-6 medium-6 small-6 columns small-text-uncenter text-center">
+			<input class="button" type="submit" value="Zip Download" onclick="updateInput('mode20', 'metodo1', 'myform')">
+		</div>
+		<div class="large-3  medium-3 small-12 columns text-right">
+			<span data-tooltip class="has-tip" title="Deletes all stored data and starts a brand new project"><button id="erase" type="button" ng-click="reset()">Resetta</button></span>
+		</div>
+
+	</div>
+
+
+<button ng-click="ShowSelectedClass()">check Selected Class</button>
+<button ng-click="ShowDataFactory()">Show Data Factory</button>
+
+
+
+
+</div><!--ends content id-->
